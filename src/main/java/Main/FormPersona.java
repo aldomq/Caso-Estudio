@@ -11,7 +11,7 @@ package Main;
 public class FormPersona extends javax.swing.JFrame {
 
     /**
-     * Creates new form Clientes
+     * Creates new form FormPersona
      */
     public FormPersona() {
         initComponents();
@@ -157,7 +157,6 @@ public class FormPersona extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(FormPersona.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
