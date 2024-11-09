@@ -25,9 +25,14 @@ public class FormProducto extends javax.swing.JFrame {
         initComponents();
     }
 
-
+    
+    public void LimpiarCampos()
+    {
+      txtNombre.setText("");
+      txtPrecio.setText("");
     
     
+      
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -194,6 +199,9 @@ public class FormProducto extends javax.swing.JFrame {
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
 
+        
+        
+    }
     }//GEN-LAST:event_btnAgregarActionPerformed
 
     /**
@@ -257,5 +265,9 @@ public class FormProducto extends javax.swing.JFrame {
     private javax.swing.JTextField txtNombre;
     private javax.swing.JTextField txtPrecio;
     // End of variables declaration//GEN-END:variables
+
+    private void initComponents() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 
 }
