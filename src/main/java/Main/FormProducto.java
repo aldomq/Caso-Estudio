@@ -23,6 +23,7 @@ public class FormProducto extends javax.swing.JFrame {
      */
     public FormProducto() {
         initComponents();
+        
     }
 
     

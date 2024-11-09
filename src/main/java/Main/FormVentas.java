@@ -15,6 +15,7 @@ public class FormVentas extends javax.swing.JFrame {
      */
     public FormVentas() {
         initComponents();
+
     }
 
     /**

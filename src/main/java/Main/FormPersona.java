@@ -4,17 +4,25 @@
  */
 package Main;
 
+import Class.Cliente;
+import Class.Empleado;
+import Class.Persona;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author aldoi
  */
 public class FormPersona extends javax.swing.JFrame {
-
+    private ArrayList<Persona> listaPersonas = new ArrayList<>();
     /**
      * Creates new form FormPersona
      */
     public FormPersona() {
         initComponents();
+
     }
 
     /**
@@ -48,19 +56,47 @@ public class FormPersona extends javax.swing.JFrame {
 
         jLabel3.setText("Puesto:");
 
+        txtNombre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtNombreActionPerformed(evt);
+            }
+        });
+
+        txtCedula.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtCedulaActionPerformed(evt);
+            }
+        });
+
+        txtPuesto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtPuestoActionPerformed(evt);
+            }
+        });
+
         btnAgregar.setText("Agregar");
+        btnAgregar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAgregarActionPerformed(evt);
+            }
+        });
 
         btnConsultar.setText("Consultar");
+        btnConsultar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnConsultarActionPerformed(evt);
+            }
+        });
 
         tblMostrar.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Nombre", "ID", "Puesto"
             }
         ));
         jScrollPane1.setViewportView(tblMostrar);
@@ -131,6 +167,60 @@ public class FormPersona extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void txtNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtNombreActionPerformed
+
+    private void txtCedulaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCedulaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtCedulaActionPerformed
+
+    private void txtPuestoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPuestoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtPuestoActionPerformed
+
+    private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
+       String nombre = txtNombre.getText();
+        String cedula = txtCedula.getText();
+        String puesto = txtPuesto.getText();
+
+        if (nombre.isEmpty() || cedula.isEmpty() || puesto.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Por favor, complete todos los campos.");
+            return;
+        }
+
+        Persona persona;
+        if (puesto.equalsIgnoreCase("Cliente")) {
+            persona = new Cliente(nombre, cedula);
+        } else if (puesto.equalsIgnoreCase("Empleado")) {
+            persona = new Empleado(nombre, cedula);
+        } else {
+            JOptionPane.showMessageDialog(this, "El puesto debe ser 'Cliente' o 'Empleado'.");
+            return;
+        }
+
+        listaPersonas.add(persona);
+        actualizarTabla();
+        limpiarCampos();
+    }//GEN-LAST:event_btnAgregarActionPerformed
+
+    private void btnConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarActionPerformed
+        actualizarTabla();
+    }//GEN-LAST:event_btnConsultarActionPerformed
+    private void actualizarTabla() {
+        DefaultTableModel model = (DefaultTableModel) tblMostrar.getModel();
+        model.setRowCount(0); 
+
+        for (Persona persona : listaPersonas) {
+            model.addRow(new Object[]{persona.getNombreCompleto(), persona.getCedula(), persona instanceof Cliente ? "Cliente" : "Empleado"});
+        }
+    }
+        private void limpiarCampos() {
+        txtNombre.setText("");
+        txtCedula.setText("");
+        txtPuesto.setText("");
+    }
 
     /**
      * @param args the command line arguments

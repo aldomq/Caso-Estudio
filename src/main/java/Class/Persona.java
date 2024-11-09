@@ -9,32 +9,33 @@ package Class;
  * @author aldoi
  */
 public abstract class Persona {
-    private String nombre;
-    private int edad;
+    private String nombreCompleto;
+    private String cedula;
 
     // Constructor
-    public Persona(String nombre, int edad) {
-        this.nombre = nombre;
-        this.edad = edad;
+    public Persona(String nombreCompleto, String cedula) {
+        this.nombreCompleto = nombreCompleto;
+        this.cedula = cedula;
     }
 
     // Métodos getter y setter
-    public String getNombre() {
-        return nombre;
+    public String getNombreCompleto() {
+        return nombreCompleto;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setNombreCompleto(String nombreCompleto) {
+        this.nombreCompleto = nombreCompleto;
     }
 
-    public int getEdad() {
-        return edad;
+    public String getCedula() {
+        return cedula;
     }
 
-    public void setEdad(int edad) {
-        this.edad = edad;
+    public void setCedula(String cedula) {
+        this.cedula = cedula;
     }
 
-    // Método abstracto
+    // Método abstracto para obtener detalles
     public abstract String getDetalles();
-}
+}    
+

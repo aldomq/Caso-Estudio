@@ -8,6 +8,17 @@ package Class;
  *
  * @author aldoi
  */
-public class Empleado {
-    
+public class Empleado extends Persona {
+    private String puesto = "Trabajador";
+
+    // Constructor
+    public Empleado(String nombreCompleto, String cedula) {
+        super(nombreCompleto, cedula);
+    }
+
+    // Implementación del método abstracto
+    @Override
+    public String getDetalles() {
+        return "Trabajador: " + getNombreCompleto() + ", Cédula: " + getCedula() + ", Puesto: " + puesto;
+    }
 }
