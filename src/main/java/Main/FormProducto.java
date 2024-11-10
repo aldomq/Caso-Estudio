@@ -8,8 +8,14 @@ import Class.Cliente;
 import Class.Empleado;
 import Class.Persona;
 import Class.Producto;
+import java.awt.event.ActionEvent;
+import java.io.BufferedWriter;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import javax.swing.JButton;
 
 /**
  *
@@ -47,6 +53,7 @@ public class FormProducto extends javax.swing.JFrame {
         txtPrecio = new javax.swing.JTextPane();
         BtnEliminar = new javax.swing.JButton();
         btnAgregar = new javax.swing.JButton();
+        btnGuardar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -87,33 +94,41 @@ public class FormProducto extends javax.swing.JFrame {
             }
         });
 
+        btnGuardar.setText("Guargar");
+        btnGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGuardarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
+                .addComponent(jLabel1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(6, 6, 6)
-                                .addComponent(btnAgregar)
-                                .addGap(18, 18, 18)
-                                .addComponent(BtnEliminar))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(21, 21, 21)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel3)
-                                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel2))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(5, 5, 5))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addGap(6, 6, 6)
+                        .addComponent(btnAgregar)
+                        .addGap(18, 18, 18)
+                        .addComponent(BtnEliminar))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(21, 21, 21)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3)
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(59, 59, 59)
+                        .addComponent(btnGuardar)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(5, 5, 5))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -134,7 +149,9 @@ public class FormProducto extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btnAgregar)
-                            .addComponent(BtnEliminar))))
+                            .addComponent(BtnEliminar))
+                        .addGap(18, 18, 18)
+                        .addComponent(btnGuardar)))
                 .addContainerGap(34, Short.MAX_VALUE))
         );
 
@@ -184,9 +201,26 @@ public class FormProducto extends javax.swing.JFrame {
         listaProductos.add(nuevoProducto);
 
         actualizarTabla();
+        
 
         limpiarCampos();
     }//GEN-LAST:event_btnAgregarActionPerformed
+
+    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
+        JButton btnGuardarTxtNombres = new javax.swing.JButton();
+        btnGuardarTxtNombres.setText("Generar TXT de Nombres");
+        btnGuardarTxtNombres.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGuardarTxtNombresActionPerformed(evt);
+            }
+
+            private void btnGuardarTxtNombresActionPerformed(ActionEvent evt) {
+                throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+            }
+              
+            
+        });
+    }//GEN-LAST:event_btnGuardarActionPerformed
     private void limpiarCampos() {
 
         txtProducto.setText("");
@@ -203,6 +237,18 @@ public class FormProducto extends javax.swing.JFrame {
             modelo.addRow(new Object[]{producto.getNombre(), producto.getPrecio()});
         }
     }
+    private void generarTxtNombres() {
+        File archivo = new File("nombres_productos.txt");
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(archivo))){
+            for (Producto producto: listaProductos) {
+                bw.write("Nombre: " + producto.getNombre());
+                bw.newLine();    
+            }
+            JOptionPane.showMessageDialog(this, "Archivo nombres_productos.txt generado correctamente.");}
+        catch (IOException e) {
+           JOptionPane.showMessageDialog(this, "Error al generar el archivo" + e.getMessage());
+        }
+    }              
 
     /**
      * @param args the command line arguments
@@ -242,6 +288,7 @@ public class FormProducto extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BtnEliminar;
     private javax.swing.JButton btnAgregar;
+    private javax.swing.JButton btnGuardar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -252,4 +299,6 @@ public class FormProducto extends javax.swing.JFrame {
     private javax.swing.JTextPane txtPrecio;
     private javax.swing.JTextPane txtProducto;
     // End of variables declaration//GEN-END:variables
+
 }
+
