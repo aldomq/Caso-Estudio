@@ -4,6 +4,16 @@
  */
 package Main;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.JCheckBox;
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author aldoi
@@ -13,8 +23,10 @@ public class FormVentas extends javax.swing.JFrame {
     /**
      * Creates new form Ventas
      */
+    private List<JCheckBox> checkBoxes = new ArrayList<>();
     public FormVentas() {
         initComponents();
+        panelProductos.setLayout(new java.awt.GridLayout(0, 4));
 
     }
 
@@ -27,35 +39,36 @@ public class FormVentas extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tblMostrar = new javax.swing.JTable();
-        btnActualizar = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
+        panelProductos = new javax.swing.JPanel();
+        btnAgregar = new javax.swing.JButton();
+        btnConsultar = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        tblMostrar.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2"
-            }
-        ));
-        tblMostrar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                tblMostrarMousePressed(evt);
+        panelProductos.setBackground(new java.awt.Color(255, 255, 255));
+        panelProductos.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        panelProductos.setLayout(new java.awt.GridLayout());
+
+        btnAgregar.setText("Agregar");
+        btnAgregar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAgregarActionPerformed(evt);
             }
         });
-        jScrollPane1.setViewportView(tblMostrar);
 
-        btnActualizar.setText("Actualizar");
-        btnActualizar.addActionListener(new java.awt.event.ActionListener() {
+        btnConsultar.setText("Consultar");
+        btnConsultar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnActualizarActionPerformed(evt);
+                btnConsultarActionPerformed(evt);
+            }
+        });
+
+        jButton1.setText("Cargar Productos");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
             }
         });
 
@@ -64,82 +77,124 @@ public class FormVentas extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnActualizar)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(2, 2, 2)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 308, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel2)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(5, 5, 5)
+                .addComponent(panelProductos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel2))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(btnAgregar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnConsultar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton1)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(62, 62, 62)
-                        .addComponent(jLabel2)))
+                        .addComponent(jLabel2))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(panelProductos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnActualizar)
-                .addContainerGap(102, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnAgregar)
+                    .addComponent(btnConsultar)
+                    .addComponent(jButton1))
+                .addContainerGap(323, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void tblMostrarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblMostrarMousePressed
+    private void btnConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarActionPerformed
+        // Lógica para consultar productos
+        StringBuilder consulta = new StringBuilder("Consulta de productos:\n");
+        for (JCheckBox checkBox : checkBoxes) {
+            consulta.append(checkBox.getText()).append("\n");
+        }
+        JOptionPane.showMessageDialog(this, consulta.toString());
 
-    }//GEN-LAST:event_tblMostrarMousePressed
+    }//GEN-LAST:event_btnConsultarActionPerformed
 
-    private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
+    private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
+        // Lógica para agregar elementos seleccionados
+        StringBuilder seleccionados = new StringBuilder("Productos seleccionados:\n");
+        for (JCheckBox checkBox : checkBoxes) {
+            if (checkBox.isSelected()) {
+                seleccionados.append(checkBox.getText()).append("\n");
+            }
+        }
+        if (seleccionados.length() > 0) {
+            JOptionPane.showMessageDialog(this, seleccionados.toString());
+        } else {
+            JOptionPane.showMessageDialog(this, "No se seleccionaron productos.");
+        }
+    }//GEN-LAST:event_btnAgregarActionPerformed
 
-    }//GEN-LAST:event_btnActualizarActionPerformed
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        cargarProductos();
+    }//GEN-LAST:event_jButton1ActionPerformed
+private void cargarProductos() {
+    // Crear el JFileChooser para permitir al usuario seleccionar el archivo
+    JFileChooser fileChooser = new JFileChooser();
+    fileChooser.setDialogTitle("Selecciona el archivo de productos");
 
+    // Mostrar el cuadro de diálogo para abrir el archivo
+    int result = fileChooser.showOpenDialog(this);
+
+    if (result == JFileChooser.APPROVE_OPTION) {
+        // Obtener el archivo seleccionado
+        File archivo = fileChooser.getSelectedFile();
+
+        // Llamar al método que lee los productos desde el archivo
+        leerProductosDesdeArchivo(archivo);
+    } else {
+        JOptionPane.showMessageDialog(this, "No se seleccionó ningún archivo.");
+    }
+}
+
+    // Método para leer los productos desde el archivo seleccionado
+private void leerProductosDesdeArchivo(File archivo) {
+    // Limpiar los productos anteriores
+    checkBoxes.clear();
+    panelProductos.removeAll();
+
+    // Comprobar si el archivo existe y luego leerlo
+    if (archivo.exists()) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(archivo))) {
+            String linea;
+            while ((linea = reader.readLine()) != null) {
+                // Crear un JCheckBox para cada producto en el archivo
+                JCheckBox checkBox = new JCheckBox(linea);
+                checkBoxes.add(checkBox);
+                panelProductos.add(checkBox);  // Añadir el JCheckBox al panel
+            }
+
+            // Actualizar la interfaz
+            panelProductos.revalidate();
+            panelProductos.repaint();
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(this, "Error al leer el archivo de productos.");
+        }
+    } else {
+        JOptionPane.showMessageDialog(this, "El archivo de productos no existe.");
+    }
+}
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FormVentas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FormVentas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FormVentas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FormVentas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new FormVentas().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnActualizar;
+    private javax.swing.JButton btnAgregar;
+    private javax.swing.JButton btnConsultar;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable tblMostrar;
+    private javax.swing.JPanel panelProductos;
     // End of variables declaration//GEN-END:variables
 }
