@@ -207,19 +207,7 @@ public class FormProducto extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAgregarActionPerformed
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-        JButton btnGuardarTxtNombres = new javax.swing.JButton();
-        btnGuardarTxtNombres.setText("Generar TXT de Nombres");
-        btnGuardarTxtNombres.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnGuardarTxtNombresActionPerformed(evt);
-            }
-
-            private void btnGuardarTxtNombresActionPerformed(ActionEvent evt) {
-                throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-            }
-              
-            
-        });
+    generarTxtNombres();
     }//GEN-LAST:event_btnGuardarActionPerformed
     private void limpiarCampos() {
 
@@ -241,7 +229,7 @@ public class FormProducto extends javax.swing.JFrame {
         File archivo = new File("nombres_productos.txt");
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(archivo))){
             for (Producto producto: listaProductos) {
-                bw.write("Nombre: " + producto.getNombre());
+                bw.write(producto.getNombre());
                 bw.newLine();    
             }
             JOptionPane.showMessageDialog(this, "Archivo nombres_productos.txt generado correctamente.");}

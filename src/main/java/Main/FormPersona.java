@@ -263,7 +263,9 @@ public class FormPersona extends javax.swing.JFrame {
         txtCedula.setText("");
         txtPuesto.setText("");
     }
-
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {                                   
+       this.setVisible(false);
+    }
     /**
      * @param args the command line arguments
      */

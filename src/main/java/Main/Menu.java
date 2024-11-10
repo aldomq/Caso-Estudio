@@ -81,19 +81,19 @@ public class Menu extends javax.swing.JFrame {
     private void jMVentasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMVentasActionPerformed
     FormVentas formVentas = new FormVentas();  
     formVentas.setVisible(true); 
-    this.setVisible(false);  
+    this.setVisible(true);  
     }//GEN-LAST:event_jMVentasActionPerformed
 
     private void jMPersonasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMPersonasActionPerformed
     FormPersona formPersona = new FormPersona();  
     formPersona.setVisible(true);  
-    this.setVisible(false); 
+    this.setVisible(true); 
     }//GEN-LAST:event_jMPersonasActionPerformed
 
     private void jMProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMProductoActionPerformed
     FormProducto formProducto = new FormProducto();  
     formProducto.setVisible(true);  
-    this.setVisible(false); 
+    this.setVisible(true); 
     }//GEN-LAST:event_jMProductoActionPerformed
 
     /**
