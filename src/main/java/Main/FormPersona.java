@@ -16,7 +16,9 @@ import javax.swing.table.DefaultTableModel;
  * @author aldoi
  */
 public class FormPersona extends javax.swing.JFrame {
+
     private ArrayList<Persona> listaPersonas = new ArrayList<>();
+
     /**
      * Creates new form FormPersona
      */
@@ -45,6 +47,7 @@ public class FormPersona extends javax.swing.JFrame {
         btnConsultar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblMostrar = new javax.swing.JTable();
+        btnActualizar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -101,30 +104,38 @@ public class FormPersona extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(tblMostrar);
 
+        btnActualizar.setText("Actualizar");
+        btnActualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnActualizarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(16, 16, 16)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addComponent(btnAgregar)
-                            .addGap(28, 28, 28)
-                            .addComponent(btnConsultar))
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtPuesto))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtCedula, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(txtPuesto))
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(txtCedula, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(btnAgregar)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnConsultar)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnActualizar))
+                    .addComponent(txtNombre))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(16, 16, 16))
         );
@@ -143,11 +154,12 @@ public class FormPersona extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtPuesto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(40, 40, 40)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAgregar)
-                    .addComponent(btnConsultar))
-                .addGap(40, 40, 40))
+                    .addComponent(btnConsultar)
+                    .addComponent(btnActualizar))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(19, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -181,7 +193,7 @@ public class FormPersona extends javax.swing.JFrame {
     }//GEN-LAST:event_txtPuestoActionPerformed
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
-       String nombre = txtNombre.getText();
+        String nombre = txtNombre.getText();
         String cedula = txtCedula.getText();
         String puesto = txtPuesto.getText();
 
@@ -206,17 +218,47 @@ public class FormPersona extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAgregarActionPerformed
 
     private void btnConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarActionPerformed
-        actualizarTabla();
+        // Mostrar un cuadro de diálogo de selección para elegir entre Cliente o Empleado
+        Object[] options = {"Cliente", "Empleado"}; // Opciones para mostrar
+        int seleccion = JOptionPane.showOptionDialog(
+                this, // El frame donde se muestra el diálogo
+                "¿Qué deseas consultar?", // Mensaje que se muestra
+                "Seleccionar tipo", // Título del cuadro de diálogo
+                JOptionPane.DEFAULT_OPTION, // No necesitamos un botón de cancelar
+                JOptionPane.QUESTION_MESSAGE, // Tipo de mensaje
+                null, // Icono personalizado (no se usa)
+                options, // Opciones del menú
+                options[0] // Valor por defecto, "Cliente"
+        );
+
+        // Si se selecciona "Cliente" (índice 0) o "Empleado" (índice 1)
+        if (seleccion == 0) {
+            // Filtrar por "Cliente"
+            filtrarPorTipo("Cliente");
+        } else if (seleccion == 1) {
+            // Filtrar por "Empleado"
+            filtrarPorTipo("Empleado");
+        }
     }//GEN-LAST:event_btnConsultarActionPerformed
+
+    private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
+        actualizarTabla();
+    }//GEN-LAST:event_btnActualizarActionPerformed
     private void actualizarTabla() {
         DefaultTableModel model = (DefaultTableModel) tblMostrar.getModel();
-        model.setRowCount(0); 
+        model.setRowCount(0); // Limpiar la tabla
 
+        // Agregar todas las personas (Clientes y Empleados)
         for (Persona persona : listaPersonas) {
-            model.addRow(new Object[]{persona.getNombreCompleto(), persona.getCedula(), persona instanceof Cliente ? "Cliente" : "Empleado"});
+            model.addRow(new Object[]{
+                persona.getNombreCompleto(),
+                persona.getCedula(),
+                persona instanceof Cliente ? "Cliente" : "Empleado"
+            });
         }
     }
-        private void limpiarCampos() {
+
+    private void limpiarCampos() {
         txtNombre.setText("");
         txtCedula.setText("");
         txtPuesto.setText("");
@@ -257,7 +299,30 @@ public class FormPersona extends javax.swing.JFrame {
         });
     }
 
+    private void filtrarPorTipo(String tipo) {
+        ArrayList<Persona> listaFiltrada = new ArrayList<>();
+
+        for (Persona persona : listaPersonas) {
+            if (tipo.equals("Cliente") && persona instanceof Cliente) {
+                listaFiltrada.add(persona);
+            } else if (tipo.equals("Empleado") && persona instanceof Empleado) {
+                listaFiltrada.add(persona);
+            }
+        }
+
+        DefaultTableModel model = (DefaultTableModel) tblMostrar.getModel();
+        model.setRowCount(0); // Limpiar la tabla
+
+        for (Persona persona : listaFiltrada) {
+            model.addRow(new Object[]{
+                persona.getNombreCompleto(),
+                persona.getCedula(),
+                persona instanceof Cliente ? "Cliente" : "Empleado"
+            });
+        }
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnActualizar;
     private javax.swing.JButton btnAgregar;
     private javax.swing.JButton btnConsultar;
     private javax.swing.JLabel jLabel1;
